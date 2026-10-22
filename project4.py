@@ -1,4 +1,4 @@
-final = 150
+final = 50
 ALIVE = 100
 hunger = 100
 import time
@@ -48,8 +48,8 @@ time.sleep(3)
 print("Procceed.")
 import time
 import random #Hey Josh, a lot of this code is reused from one of my other projects so thats why a  lot of these variables dont line up with the theme;
-for i in range (999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999):#Hey Josh! You just lost the game!
-    if day >= 1:# final:
+for i in range (999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999):#Hey Josh! You just lost the game! Also this is tha start of the big loop.
+    if day >= final: #Hey josh this  is the end of the loop for victory!
         print("You have arrived at the DEFIANCE Central Operations Center.")
         time.sleep(2)
         print("You must enter the code.")
@@ -79,28 +79,86 @@ for i in range (9999999999999999999999999999999999999999999999999999999999999999
     if ALIVE <= 90 :
         ALIVE = ALIVE + random.randint(0,10)
     print(f"Distance Traveled: {day}") 
-    print(f"Hydration: {water}, Appetite: {hunger}, Status: {ALIVE}, Balence: {money}")
+    print(f"Hydration: {water}, Appetite: {hunger}, Status: {ALIVE}")
     camp = random.randint(1,7)
     if camp == 1:
-        if input("As you walk down the path, it begins to get steeper...  Y/N ") == "Y":
-            print
+        if input("You are under attack. A man is running towards you.  Try to dodge? Y/N ") == "Y":
+            if random.randint(1,2) == 2:
+                print("You dodge and he sprinted away")
+            else:
+                print("You failed to dodge...")
+                health = random.randint(1,10)
+                ALIVE -= health
+                time.sleep(1)
+                print(f"And lost {health} status. The man runs.")
+        else:
+            health = random.randint(1,10)
+            ALIVE -= health
+            time.sleep(1)
+            print(f"You lost {health} status. The man runs.")
     elif camp ==2:
         if input("? Y/N ") == "Y":
             print("")
     elif camp == 3:
-        print
+        poison = random.randint (1,50)
+        print("You come upon a table in the woods. It is covered in food.")
+        time.sleep(2)
+        print(f"A sign says 'Take {poison}'")
+        take = input("How many do you take? Intiger ")
+        if take <= poison:
+            print(f"You took {take}")
+        else:
+            print("You took too much...")
     elif camp == 4: 
         if input(" Y/N ") == "Y":
             print
     elif camp == 5 :
-        print()
+        print("SOMEONE IS COMING.")
+        time.sleep(3)
+        for i in range (random.randint(1,100)):
+            print("HIDE ", end="", flush = True)
+            time.sleep(0.05)
+        print("HIDE")
+        if input("HIDE Y/N ") == "Y":
+            print("You hid")
+            for i in range(3):
+                time.sleep(0.5)
+                print(".", end="", flush = True)
+            if random.randint(1,10) == 10:
+                time.sleep(3)
+                for i in range(30):
+                    print("HE FOUND YOU")
+                    time.sleep(0.05)
+                time.sleep(2)
+                quit()
+            else:
+                print("HE moves on...")
+        else:
+            for i in range(30):
+                print("HE FOUND YOU")
+                time.sleep(0.05)
+            time.sleep(2)
+            quit()
     elif camp == 6:
-        print
+        print("You come across a campsite. There are some water bottles and rations.")
+        time.sleep(1)
+        if input("Pick them up? Y/N ") == "Y":
+            print("You picked them up...")
+            hydration = random.randint(1,35)
+            food = random.randint(1,20)
+            time.sleep(1)
+            print(f"You gained {hydration} water and {food} hunger.")
     else:
         print("The path stretches on...")
     hunger = hunger - random.randint (1, 7)
     water = water - random.randint (1, 7)
     day = day + 1
+    if ALIVE <= 0 :
+        print("You have passed beyond this mortal coil.")
+        time.sleep(2)
+        print("DEFIANCE ENEMY STATUS: TERMINATED.")
+        time.sleep(1)
+        quit()
     time.sleep(1)
     print("You continue down the path...")
     time.sleep(2)
